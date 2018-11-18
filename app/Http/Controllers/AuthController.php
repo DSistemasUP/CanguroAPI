@@ -29,7 +29,8 @@ class AuthController extends Controller
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'scope' => 'Admin',
+            'password' => bcrypt($request->password),        
         ]);
         $user->save();
         return response()->json([
@@ -59,10 +60,10 @@ class AuthController extends Controller
                 'message' => 'Unauthorized'
             ], 401);
         $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token');
+        $tokenResult = $user->createToken('Personal Access Token', [$user->scope]);
         $token = $tokenResult->token;
         if ($request->remember_me)
-            $token->expires_at = Carbon::now()->addWeeks(1);
+            $token->expires_at = Carbon::now()->addMinutes(1);
         $token->save();
         return response()->json([
             'access_token' => $tokenResult->accessToken,
