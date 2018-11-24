@@ -27,8 +27,8 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes(); 
         Passport::tokensExpireIn(Carbon::now()->addMinutes(1));
         Passport::tokensCan([
-             'Admin'=> 'Admin_Rol',
-             'get_Repartidor'=> 'Repartidor_Rol'
+             'Admin'=> 'Admin_Scope',
+             'Repartidor'=> 'Repartidor_Scope'
         ]);
         
     }
