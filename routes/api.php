@@ -24,16 +24,16 @@ Route::group([
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@signup');
     Route::group([
-      'middleware' => 'auth:api'
+      'middleware' => 'auth:api',
     ], function() {
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');
     });
-});
-
-Route::group([
-    'prefix' => 'admin',
-    'middleware' => 'cors','auth:api','scope:Admin'
-  ], function() {
-      Route::get('services', 'ServiceController@getAll_services');
+    
+    Route::group([
+        'prefix' => 'admin',
+        'middleware' => 'auth:api','scope:Admin'
+      ], function() {
+          Route::get('services', 'ServiceController@getAll_services');
+    });
 });
