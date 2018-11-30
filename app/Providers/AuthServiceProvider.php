@@ -25,10 +25,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes(); 
-        Passport::tokensExpireIn(Carbon::now()->addMinutes(1));
+        Passport::tokensExpireIn(Carbon::now()->addDays(1));
         Passport::tokensCan([
              'Admin'=> 'Admin_Scope',
-             'Repartidor'=> 'Repartidor_Scope'
+             'Repartidor'=> 'Repartidor_Scope',
+             'Cliente'=> 'Cliente_Scope'
         ]);
         
     }

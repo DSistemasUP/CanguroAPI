@@ -37,6 +37,38 @@ class AuthController extends Controller
             'message' => 'Successfully created user!'
         ], 201);
     }
+
+
+    /**
+     * Create user
+     *
+     * @param  [string] name
+     * @param  [string] email
+     * @param  [string] password
+     * @param  [string] password_confirmation
+     * @return [string] message
+     */
+    public function signupClient(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:users',
+            'password' => 'required|string|confirmed',
+            'numberPhone' => 'string'
+        ]);
+        $user = new User([
+            'name' => $request->name,
+            'email' => $request->email,
+            'numberPhone' => $request->numberPhone,
+            'scope' => 'Cliente',
+            'password' => bcrypt($request->password),        
+        ]);
+        $user->save();
+        return response()->json([
+            'message' => 'Successfully created user!'
+        ], 201);
+    }
+
     /**
      * Login user and create token
      *
@@ -58,7 +90,7 @@ class AuthController extends Controller
         if(!Auth::attempt($credentials))
             return response()->json([
                 'message' => 'Unauthorized'
-            ], 401);
+            ], 404);
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token', [$user->scope]);
         $token = $tokenResult->token;

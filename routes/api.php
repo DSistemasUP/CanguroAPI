@@ -36,4 +36,11 @@ Route::group([
       ], function() {
           Route::get('services', 'ServiceController@getAll_services');
     });
+
+    Route::post('signup/client', 'AuthController@signupClient');
+    Route::group([
+        'prefix' => 'client',
+      ], function() {
+          Route::post('createService', 'ServiceController@createService');
+    });
 });
