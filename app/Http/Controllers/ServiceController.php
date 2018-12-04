@@ -43,7 +43,8 @@ class ServiceController extends Controller
                     'description_b' => $service->description_b,
                     'created_at'=> $service->created_at,
                     'updated_at'=> $service->updated_at,
-                    'date_time_required' => $service->date_time_required
+                    'date_time_required' => $service->date_time_required,
+                    'referencia' =>$service->referencia   
                     ]
                 );
             }
