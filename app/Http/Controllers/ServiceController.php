@@ -66,7 +66,8 @@ class ServiceController extends Controller
                 'address_b' => 'required|string',
                 'service_type' => 'required|string',
                 'date_time_required' => 'required|string' ,
-                'email' => 'required|string'            
+                'email' => 'required|string' , 
+                'referencia'=> 'required|string'        
             ]);
             $LocationA=new Location([
                 'latitude' => '0',
@@ -93,7 +94,8 @@ class ServiceController extends Controller
                 'description_b' => $request->description_b,
                 'id_location_b' => $LocationB->id,
                 'id_service_type' => $servicetype[0]->id,
-                'date_time_required' => $date    
+                'date_time_required' => $date ,
+                'referencia' =>$request->referencia   
             ]);  
             $Service->save();
         }catch(Exception $e){

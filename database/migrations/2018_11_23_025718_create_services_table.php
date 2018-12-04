@@ -22,6 +22,7 @@ class CreateServicesTable extends Migration
             $table->string('description_a');
             $table->unsignedInteger('id_location_b');
             $table->string('description_b');
+            $table->string('referencia');
             
             $table->timestamps();
             $table->dateTime('date_time_required');
